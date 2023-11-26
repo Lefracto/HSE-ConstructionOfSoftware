@@ -3,9 +3,16 @@
  *  (1 балл)
  */
 fun replaceElements(array: List<String>): List<String> {
-    return listOfNotNull()
+    val uniqueElements = HashSet<String>()
+    return array.map { element ->
+        if (uniqueElements.contains(element)) {
+            "blahblah"
+        } else {
+            uniqueElements.add(element)
+            element
+        }
+    }
 }
-
 
 /**
  *  Задание 2: Вернуть количество уникальных слов в строке.
@@ -13,15 +20,31 @@ fun replaceElements(array: List<String>): List<String> {
  *  (1 балл)
  */
 fun uniqueWords(text: String): Int {
-    return 0
+    val words = text.split(" ")
+    val uniqueWordsSet = mutableSetOf<String>()
+
+    for (word in words) {
+        uniqueWordsSet.add(word)
+    }
+
+    return uniqueWordsSet.size
 }
 
 // Используйте эту функцию для запуска кода
 // Раскомментируйте нужные участки в процессе реализации
 fun main() {
-    //val text = ""
-    //println(uniqueWords(text))
 
-    // Вызвать для text и вывести результат замены на экран
-    //replaceElements()
+    val input1 = "I like Kotlin, I like C++, we adore C#"
+    val output1 = uniqueWords(input1)
+    println("Test 1:")
+    println("Input: $input1")
+    println("Output: $output1")
+    println()
+
+    val input2 = listOf("C#", "Swift", "C#", "C", "C++", "Swift")
+    val output2 = replaceElements(input2)
+    println("Test 2:")
+    println("Input: $input2")
+    println("Output: $output2")
+    println()
 }
