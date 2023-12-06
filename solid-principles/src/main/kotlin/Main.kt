@@ -1,20 +1,23 @@
-import dependencyInversionPrinciple.badImplementation.Emailer
-import dependencyInversionPrinciple.badImplementation.Phone
-import dependencyInversionPrinciple.badImplementation.WeatherTracker
-import interfaceSegregationPrinciple.badImplementation.Eagle
-import interfaceSegregationPrinciple.badImplementation.Penguin
-import openClosedPrinciple.badImplementation.EmailGreeting
+import dependencyInversionPrinciple.betterImplementation.Emailer
+import dependencyInversionPrinciple.betterImplementation.Phone
+import dependencyInversionPrinciple.betterImplementation.WeatherTracker
+import interfaceSegregationPrinciple.betterImplementation.Eagle
+import interfaceSegregationPrinciple.betterImplementation.Penguin
+import openClosedPrinciple.betterImplementation.CasualGreeting
+import openClosedPrinciple.betterImplementation.EmailGreeting
+import openClosedPrinciple.betterImplementation.FormalGreeting
 
 
 fun main(args: Array<String>) {
     // ЗАДАНИЕ 1: Приветствие
-    val greeting: EmailGreeting = EmailGreeting("formal")
+    val greetingS = FormalGreeting()
+    val greeting: EmailGreeting = EmailGreeting(greetingStrategy = greetingS)
     require(greeting.greeting == "Good evening, sir.") {
         "Wrong message intro"
     }
 
     // ЗАДАНИЕ 2: Уведомления о погоде
-    val tracker = WeatherTracker(phone = Phone(), emailer = Emailer(), conditions = "sunny")
+    val tracker = WeatherTracker(rainNotifier = Phone(), sunnyNotifier = Emailer(), conditions = "sunny")
 
     // let's get a phone notification
     tracker.setCurrentConditions("rainy")
@@ -27,8 +30,8 @@ fun main(args: Array<String>) {
 
     // Пингвин не хочет чувствовать себя ущербным:(
     // А мы не хотим видеть исключения в коде...
-    penguin.fly()
 
-
+    //penguin.fly()
+    penguin.swim()
 
 }
